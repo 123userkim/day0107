@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	.active{
+		background-color : pink;
+	}
+</style>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+	$(function() {		
+		var arr = $("input[type=text]");
+		var td_list;
+		
+		$("#btnAdd").click(function() {		
+			var tr = $("<tr></tr>");
+			var tot = 0;
+			$.each(arr,function(index,item){
+				let data = $(item).val();
+				let td = $("<td></td>").html(data);
+				$(tr).append(td);
+				if(index !=0){
+					tot +=Number(data);
+				}  
+			});
+			avg=tot/3;
+			$(tr).append($("<td></td>").html(tot));
+			$(tr).append($("<td></td>").html(avg));
+			$("#list").append(tr);
+		 
+		});
+		
+		
+		$(document).on("click","tr",function(){
+			//지금 선택한 것의 td를 찾기 <td>홍길동</td>
+			td_list	=$(this).find("td");			
+			//이전의 클래스를 지움
+			$("tr").removeClass("active");			
+			//클래스를 추가함
+			$(this).addClass("active");					 
+			
+			//찾은 걸 반복문 돌려서 빼기
+			$.each(arr,function(index, item){
+				//리스트의 인덱스의 내용을 읽어와서, item에 넣기
+		 		 $(item).val(	$(td_list[index]).html()  );
+			});		
+		}) 
+		 
+	});	
+		 
+	
+	
+</script>
+</head>
+<body>
+	<table border="1" width="80%" id="list">
+		<tr>
+			<th>이름</th>
+			<th>국어</th>
+			<th>영어</th>
+			<th>수학</th>
+			<th>총점</th>
+			<th>평균</th>	 
+		</tr>	
+	</table>
+	
+	<hr>
+	이름: <input type="text" id="name"><br>
+	국어: <input type="text" id="kor"><br>
+	영어: <input type="text" id="english"><br>
+	수학: <input type="text" id="math"><br>
+	 
+	<button id="btnAdd">등록</button>
+
+	 
+	 
+</body>
+</html>

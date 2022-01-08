@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+.active{
+		background-color : red;
+	}
+.high_light{
+	background-color : yellow;
+	}
+</style>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+	 
+		let selected_li;
+		
+		//----------행 추가하기-------------
+		$("#btnAdd").click(function(){
+			//데이터를 읽어옴
+			let data = $("#data").val();		
+			//데이터를 li넣기
+			let li=	$("<li></li>").html(data); //innerHTML
+			//ul에 넣기
+			$("#list").append(li);
+			$("#data").val(""); //value의 대신
+		}) 
+		
+		//------------------클릭시---------------------
+		$(document).on("click", "li", function(){
+			selected_li = this;
+			$("li").removeClass("active");
+			$(this).addClass("active");
+			
+			let str = $(this).html();
+			$(data).val(  str  );
+		});
+		
+		
+		//-----------------행 수정하기 by enter---------
+		$("#data").keypress(function(e){
+			let code = e.keyCode;
+			if(code == 13){
+				$(selected_li).html(  $("#data").val()  );
+			}
+		});
+	 
+		 
+		//----------마우스가 올라가면-------------
+		$(document).on("mouseover","li",function(){			
+			$(this).addClass("high_light");			
+		}) 
+		
+		//----------마우스가 내려가면-------------
+		$(document).on("mouseleave","li",function(){
+			$(this).removeClass("high_light");
+		})
+		
+		
+		//--------------행 삭제 by 더블클릭---------
+		$(document).on("dblclick",function() {		 
+			 	$(selected_li).remove();
+		})
+		
+		 
+	});	
+</script>
+</head>
+<body>
+	<h2>직장이 선호하는 점심메뉴</h2>
+	<hr>
+	<ul id ="list"  ></ul>
+	<hr>
+	입력하시오 
+	<input type="text" id="data" >
+	<button id="btnAdd">추가</button>
+ 
+</body>
+</html>

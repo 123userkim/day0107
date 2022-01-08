@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+//정보를 입력후, 화면에 삽입하기
+	$(function() {
+		//$("#list").css("border","solid 1px black");
+		//$("#list").css("width","600");
+		$("#list").css({
+			border : "solid 1px red",
+			width : "600"
+		});
+		
+		
+		$('#btnAdd').click(function( ) {				
+			var	name = $("#name").val();
+			var	age = $("#age").val();
+			var	addr = $("#addr").val();
+				 
+			var tr = $("<tr></tr>");
+			var td1 = $("<td></td>").html(name);
+			var td2 = $("<td></td>").html(age);
+			var td3 = $("<td></td>").html(addr);
+			
+			$(tr).append(td1);
+			$(tr).append(td2);
+			$(tr).append(td3);
+			
+			$("#list").append(tr);
+			
+			$("#name").val("");
+			$("#age").val("");
+			$("#addr").val("");
+		});
+		
+		 
+	
+		/*-----------------MY----------------------
+		//클릭했을 때
+		$('#btnAdd').click(function( ) {
+			name = $("#name").val();
+			age = $("#age").val();
+			addr = $("#addr").val();
+			 
+		 	td = $("<td></td>").html(name,age,addr)		  
+		 	$("#list").append(td)	
+		});
+		
+		*/
+	});
+</script>
+</head>
+<body>
+	이름 : <input type="text" id="name"><br>
+	나이 : <input type="text" id="age"><br>
+	주소 : <input type="text" id="addr"><br>	
+	
+	<input type="submit" value="등록" id = "btnAdd"> 
+	<table id="list"> 
+		<tr>
+			<th>이름</th>
+			<th>나이</th>
+			<th>주소</th>		
+		</tr>		
+	</table>
+</body>
+</html>

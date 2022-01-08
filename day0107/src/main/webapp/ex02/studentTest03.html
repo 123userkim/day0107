@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	.active{
+		background-color : pink;
+	}
+	.high_light{
+	background-color : yellow;
+	}
+</style>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+	$(function() {		
+		var data = $("input[type=text]");
+		var td_list;
+		var sel_tr; //눌러진 tr을 담을 변수
+		
+		
+		//----------행 추가하기-------------
+		$("#btnAdd").click(function() {		
+			//tr 추가하기
+			var tr = $("<tr></tr>");
+			var tot = 0;
+			$.each(arr,function(index,item){
+				//데이터 읽기 - > 배열이기 때문에 반복문 돌림
+				let data = $(item).val();
+				//td에 읽어온 데이터 넣기
+				let td = $("<td></td>").html(data);
+				//tr에 넣기
+				$(tr).append(td);
+				if(index !=0){
+					tot +=Number(data);
+				}  
+			});
+			avg=tot/3;
+			//tr에 나머지 총합이랑 평균 넣기
+			$(tr).append($("<td></td>").html(tot));
+			$(tr).append($("<td></td>").html(avg));
+			$("#list").append(tr);
+		 
+		});
+		
+		//------------------클릭시---------------------
+		$(document).on("click","tr",function(){
+			//눌러진 나를 sel_tr
+			sel_tr = $(this);
+			//지금 선택한 것의 td를 찾기 <td>홍길동</td>
+			td_list	=$(this).find("td");			
+			//이전의 클래스를 지움
+			$("tr").removeClass("active");			
+			//클래스를 추가함
+			$(this).addClass("active");					 
+			
+			//찾은 걸 반복문 돌려서 빼기
+			$.each(arr,function(index, item){
+				//리스트의 인덱스의 내용을 읽어와서, item에 넣기
+		 		 $(item).val(	$(td_list[index]).html()  );
+			});		
+		}) 
+		
+	 
+		//----------선택한 행 수정하기-------------
+		$("#btnUpdate").click(function() {
+			var tot =0;
+			$.each(arr, function(index, item) {				
+				//선택한 td를 입력상자의 내용으로 바꾸기
+				//0번째는.뽑아오는 this의 값
+				$(td_list[index]).html($(this).val());
+		 		if(index !=0 ){
+		 			//총점은 item을 다 읽어와서 더하기
+		 			tot += Number($(item).val());
+		 		}
+				
+			});
+			avg = tot/3;
+			$(td_list[4]).html(tot);
+			$(td_list[5]).html(avg);	 			
+		}) 
+		
+		
+		//----------선택한 행 삭제하기-------------
+		//선택한 행을 얘가 알아야함 - > 전체 변수를 만듦
+		$("#btnDelete").click(function() {		 
+			 	$(sel_tr).remove();		 
+		})
+		 
+		
+		//----------마우스가 올라가면-------------
+		$(document).on("mouseover","tr",function(){			
+			$(this).addClass("high_light");			
+		}) 
+		
+		//----------마우스가 내려가면-------------
+		$(document).on("mouseleave","tr",function(){
+			$(this).removeClass("high_light");
+		})
+		
+	  
+	});	
+	 
+</script>
+</head>
+<body>
+	<table border="1" width="80%" id="list">
+		<tr >
+			<th>이름</th>
+			<th>국어</th>
+			<th>영어</th>
+			<th>수학</th>
+			<th>총점</th>
+			<th>평균</th>	 
+		</tr>	
+	</table>
+	
+	<hr>
+	이름: <input type="text" id="name"><br>
+	국어: <input type="text" id="kor"><br>
+	영어: <input type="text" id="english"><br>
+	수학: <input type="text" id="math"><br>
+	 
+	<button id="btnAdd">등록</button>
+	<button id="btnUpdate">수정</button>
+	<button id="btnDelete">삭제</button>
+
+</body>
+</html>

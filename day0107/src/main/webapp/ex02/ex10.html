@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+//정보를 입력후, 화면에 삽입하기
+	$(function() { 
+		$("#list").css({
+			border : "solid 1px red",
+			width : "600"
+		});
+	 
+		$('#btnAdd').click(function( ) {	
+			//input태그중에서 type이 text인 거만
+			var arr = $("input[type=text]") //배열
+			 
+			//tr만들기
+			var tr = $("<tr></tr>");			
+			$.each(arr,function(index,item){				
+				//데이터를 읽어와야 함
+				data = $(this).val();				
+				//읽어온 data를 td에 넣어줌
+				//홍길동을 td에 넣기
+				var td = $("<td></td>").html(data);
+				$(tr).append(td);				
+			})				
+			$("#list").append(tr);
+		});				 
+		  
+	});
+</script>
+</head>
+<body>
+	이름 : <input type="text"><br>
+	나이 : <input type="text"><br>
+	주소 : <input type="text"><br>	
+	
+	<input type="submit" value="등록" id = "btnAdd"> 
+	<table id="list"> 
+		<tr>
+			<th>이름</th>
+			<th>나이</th>
+			<th>주소</th>		
+		</tr>		
+	</table>
+</body>
+</html>

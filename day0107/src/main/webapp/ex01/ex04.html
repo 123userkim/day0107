@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+		//$("h2")-> 한꺼번에 값이 변경이 됨 :  배열로 인식
+		//r=$("h2").text();	
+		//.text():매개변수를 설정하지 않는 다는 것은 :  읽어옴
+		//서울부산인천
+		
+		r=$("h2").html();	
+		//서울 : 맨 처음의 값만 읽어와 짐
+		//여러 개의 값의 처리가 필요하다면 반복문을 사용
+		alert(r);
+	
+	});
+</script>
+</head>
+<body>
+	<h1>홍길동</h1>
+	<h2>서울</h2>
+	<h1>이순신</h1>
+	<h2>부산</h2>
+	<h1>유관순</h1>
+	<h2>인천</h2>
+</body>
+</html>

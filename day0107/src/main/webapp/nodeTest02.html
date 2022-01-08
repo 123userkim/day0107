@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+		let arr = ["짜장면","햄버거","짬뽕","청국장","된장찌게"];		
+		$("#btnAdd").click(function() {				
+			$.each(arr,function(index,item){
+				//데이터 읽기 - > 배열이기 때문에 반복문 돌림
+				let li = $("<li></li>").html(item);				 
+				$("ul").append(li);	 
+			});	 
+		});
+	});
+</script>
+</head>
+<body>
+<div></div>
+	<ul></ul>
+	<button id="btnAdd">읽어오기</button>
+</body>
+</html>
